@@ -37,7 +37,9 @@ class Timer extends React.Component {
     document.addEventListener("keydown", this.handleArrow);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleArrow);
+  }
 
   render() {
     return (
