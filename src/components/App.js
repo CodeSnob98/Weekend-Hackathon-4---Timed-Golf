@@ -3,29 +3,27 @@ import "../styles/App.css";
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { time: 0, x: 0, y: 0, clicked: false };
+    this.state = { time: 0, x: 0, y: 0 };
     this.handleClick = this.handleClick.bind(this);
     this.handleArrow = this.handleArrow.bind(this);
     this.r = React.createRef();
   }
   handleClick() {
-    this.setState({ clicked: true });
+    document.addEventListener("keydown", this.handleArrow);
     this.r.current = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
     }, 1000);
   }
   handleArrow(event) {
-    if (this.state.clicked) {
-      let key = event.keyCode;
-      if (key === 39) {
-        this.setState({ x: this.state.x + 5 });
-      } else if (key === 37) {
-        this.setState({ x: this.state.x - 5 });
-      } else if (key === 38) {
-        this.setState({ y: this.state.y - 5 });
-      } else if (key === 40) {
-        this.setState({ y: this.state.y + 5 });
-      }
+    let key = event.keyCode;
+    if (key === 39) {
+      this.setState({ x: this.state.x + 5 });
+    } else if (key === 37) {
+      this.setState({ x: this.state.x - 5 });
+    } else if (key === 38) {
+      this.setState({ y: this.state.y - 5 });
+    } else if (key === 40) {
+      this.setState({ y: this.state.y + 5 });
     }
     if (this.state.x === 250 && this.state.y === 250) {
       clearInterval(this.r.current);
@@ -33,9 +31,7 @@ class Timer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleArrow);
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {}
 
