@@ -29,8 +29,10 @@ class Timer extends React.Component {
     }
     if (this.state.x === 250 && this.state.y === 250) {
       clearInterval(this.r.current);
+      this.setState({ clicked: false });
     }
   }
+
   componentDidMount() {
     document.addEventListener("keydown", (event) => this.handleArrow(event));
   }
